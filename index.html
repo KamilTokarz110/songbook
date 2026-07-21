@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f5f0" />
+    <meta name="description" content="Niezbędnik biesiady — śpiewnik weselny Eweliny i Macieja" />
+    <title>Niezbędnik biesiady — Ewelina &amp; Maciej</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <img
+        class="hero__cover"
+        src="assets/cover.png"
+        alt="Niezbędnik biesiady — Ewelina &amp; Maciej"
+        width="1200"
+        height="1600"
+        fetchpriority="high"
+      />
+      <p class="hero__tagline">Śpiewnik weselny · skanuj, śpiewaj, baw się</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#spis">Spis treści</a>
+        <a class="btn btn--ghost" href="public/spiewnik.pdf" download>Pobierz PDF</a>
+      </div>
+    </header>
+
+    <div class="toolbar" id="toolbar">
+      <label class="search">
+        <span class="visually-hidden">Szukaj piosenki</span>
+        <input
+          type="search"
+          id="search"
+          placeholder="Szukaj piosenki…"
+          autocomplete="off"
+          enterkeyhint="search"
+        />
+      </label>
+      <p class="toolbar__meta" id="result-count" aria-live="polite"></p>
+    </div>
+
+    <main>
+      <section class="toc" id="spis" aria-labelledby="toc-heading">
+        <h2 id="toc-heading">Spis treści</h2>
+        <nav>
+          <ol class="toc__list" id="toc-list"></ol>
+        </nav>
+        <p class="empty" id="toc-empty" hidden>Brak wyników. Spróbuj innego hasła.</p>
+      </section>
+
+      <section class="songs" id="songs" aria-label="Teksty piosenek"></section>
+    </main>
+
+    <a class="back-top" href="#top" aria-label="Do góry">↑</a>
+
+    <footer class="footer">
+      <p class="footer__names">Ewelina <span>&amp;</span> Maciej</p>
+      <p class="footer__note">Niezbędnik biesiady</p>
+      <p class="footer__links">
+        <a href="public/spiewnik.pdf" download>Pobierz PDF</a>
+        ·
+        <a href="qr.html">Kod QR</a>
+      </p>
+    </footer>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

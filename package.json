@@ -1,0 +1,15 @@
+{
+  "name": "spiewnik-weselny",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Śpiewnik weselny Eweliny i Macieja — statyczna strona na GitHub Pages",
+  "scripts": {
+    "extract": "node scripts/extract-pdf.mjs",
+    "qr": "node scripts/generate-qr.mjs",
+    "serve": "npx --yes serve ."
+  },
+  "devDependencies": {
+    "pdfjs-dist": "^4.10.38",
+    "qrcode": "^1.5.4"
+  }
+}

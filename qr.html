@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kod QR — Niezbędnik biesiady</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Source+Sans+3:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="qr-page">
+    <main class="qr-card">
+      <p class="qr-card__script">Ewelina &amp; Maciej</p>
+      <h1>Niezbędnik biesiady</h1>
+      <p class="qr-card__hint">Zeskanuj, aby otworzyć śpiewnik</p>
+      <img
+        id="qr-image"
+        class="qr-card__img"
+        src="assets/qr.png"
+        alt="Kod QR do śpiewnika"
+        width="280"
+        height="280"
+      />
+      <p class="qr-card__url" id="qr-url"></p>
+      <a class="btn btn--primary" href="index.html">Wróć do śpiewnika</a>
+      <p class="qr-card__note">
+        Jeśli obrazek QR jest pusty, wygeneruj go:
+        <code>npm run qr -- https://TWOJ-NICK.github.io/songbook/</code>
+      </p>
+    </main>
+    <script>
+      const url = new URL(".", location.href).href;
+      document.getElementById("qr-url").textContent = url.replace(/\/$/, "") || location.origin;
+      document.getElementById("qr-image").onerror = () => {
+        document.getElementById("qr-image").style.display = "none";
+      };
+    </script>
+  </body>
+</html>
