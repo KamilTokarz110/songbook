@@ -21,6 +21,30 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;");
 }
 
+/** Split lyrics into verse blocks (1. / 2. / Ref. …) for readable spacing */
+function formatLyrics(lyrics) {
+  const lines = lyrics.split("\n");
+  const blocks = [];
+  let buf = [];
+
+  const isVerseStart = (line) =>
+    /^(?:\d{1,2}\.|Ref\.|Refren)/i.test(line.trim());
+
+  for (const line of lines) {
+    if (buf.length && isVerseStart(line)) {
+      blocks.push(buf.join("\n"));
+      buf = [line];
+    } else {
+      buf.push(line);
+    }
+  }
+  if (buf.length) blocks.push(buf.join("\n"));
+
+  return blocks
+    .map((block) => `<p class="song__verse">${escapeHtml(block)}</p>`)
+    .join("");
+}
+
 function render(songs) {
   tocList.innerHTML = songs
     .map(
@@ -42,7 +66,7 @@ function render(songs) {
           <span class="song__num">${s.num}.</span>
           <h2 class="song__title">${escapeHtml(s.title)}</h2>
         </header>
-        <pre class="song__lyrics">${escapeHtml(s.lyrics)}</pre>
+        <div class="song__lyrics">${formatLyrics(s.lyrics)}</div>
         <a class="song__back" href="#spis">↑ Spis treści</a>
       </article>`
     )

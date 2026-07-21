@@ -276,11 +276,20 @@ main {
 
 .song__lyrics {
   margin: 0;
-  white-space: pre-wrap;
-  font-size: clamp(1.05rem, 2.8vw, 1.15rem);
-  line-height: 1.65;
+  font-size: clamp(1.1rem, 3vw, 1.22rem);
+  line-height: 1.7;
   font-family: var(--serif);
   font-weight: 500;
+}
+
+.song__verse {
+  margin: 0 0 1.15em;
+  white-space: pre-wrap;
+  letter-spacing: 0.01em;
+}
+
+.song__verse:last-child {
+  margin-bottom: 0;
 }
 
 .song__back {
