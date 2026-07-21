@@ -394,6 +394,15 @@ main {
   font: inherit;
 }
 
+.qr-print-hint {
+  max-width: 24rem;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+  line-height: 1.4;
+}
+
 .qr-card {
   width: min(100%, 24rem);
   text-align: center;

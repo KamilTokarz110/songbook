@@ -17,10 +17,13 @@
       <button type="button" class="btn btn--primary" id="btn-print-one">
         Drukuj 1 kartkę / PDF
       </button>
+      <button type="button" class="btn btn--ghost" id="btn-print-sheet">
+        Drukuj 4 na A4
+      </button>
       <a class="btn btn--ghost" href="index.html">Wróć do śpiewnika</a>
     </div>
 
-    <main class="qr-card" id="preview-card" data-print="one">
+    <main class="qr-card" id="preview-card">
       <p class="qr-card__script">Ewelina &amp; Maciej</p>
       <h1>Niezbędnik biesiady</h1>
       <p class="qr-card__hint">Zeskanuj, aby otworzyć śpiewnik</p>
@@ -31,44 +34,29 @@
         width="280"
         height="280"
       />
-      <p class="qr-card__url js-url"></p>
     </main>
 
-    <!-- Arkusz do cięcia: 4 kartki na A4 (widoczny tylko przy druku „4 na A4”) -->
-    <section class="qr-sheet" id="print-sheet" data-print="sheet" hidden aria-hidden="true">
+    <section class="qr-sheet" id="print-sheet" hidden aria-hidden="true">
       <article class="qr-card qr-card--print"></article>
       <article class="qr-card qr-card--print"></article>
       <article class="qr-card qr-card--print"></article>
       <article class="qr-card qr-card--print"></article>
     </section>
 
-
     <template id="card-template">
       <p class="qr-card__script">Ewelina &amp; Maciej</p>
       <h1>Niezbędnik biesiady</h1>
       <p class="qr-card__hint">Zeskanuj, aby otworzyć śpiewnik</p>
       <img class="qr-card__img" src="assets/qr.png" alt="" width="220" height="220" />
-      <p class="qr-card__url js-url"></p>
     </template>
 
     <script>
-      const SITE_URL = "https://kamiltokarz110.github.io/songbook/";
-      const mode = { current: "one" };
-
-      document.querySelectorAll(".js-url").forEach((el) => {
-        el.textContent = SITE_URL.replace(/\/$/, "");
-      });
-
       const tpl = document.getElementById("card-template");
       document.querySelectorAll(".qr-card--print").forEach((card) => {
         card.appendChild(tpl.content.cloneNode(true));
-        card.querySelectorAll(".js-url").forEach((el) => {
-          el.textContent = SITE_URL.replace(/\/$/, "");
-        });
       });
 
       function printAs(kind) {
-        mode.current = kind;
         document.body.dataset.printMode = kind;
         const sheet = document.getElementById("print-sheet");
         if (kind === "sheet") {
