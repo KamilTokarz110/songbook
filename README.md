@@ -47,6 +47,8 @@ Powstanie [`assets/qr.png`](assets/qr.png) (podmienia przykładowy plik). Podgl�
 
 Wklej QR na stoły / zaproszenia — goście skanują i od razu mają śpiewnik w telefonie.
 
+Na stronie [`qr.html`](qr.html) są przyciski **Drukuj 1 kartkę / PDF** oraz **Drukuj 4 na A4** (do wycięcia na stoły). W oknie drukowania możesz wybrać „Zapisz jako PDF”.
+
 ## Struktura
 
 | Plik | Opis |

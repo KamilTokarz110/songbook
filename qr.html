@@ -13,27 +13,88 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="qr-page">
-    <main class="qr-card">
+    <div class="qr-toolbar no-print">
+      <button type="button" class="btn btn--primary" id="btn-print-one">
+        Drukuj 1 kartkę / PDF
+      </button>
+      <button type="button" class="btn btn--ghost" id="btn-print-sheet">
+        Drukuj 4 na A4
+      </button>
+      <a class="btn btn--ghost" href="index.html">Wróć do śpiewnika</a>
+    </div>
+
+    <main class="qr-card" id="preview-card" data-print="one">
       <p class="qr-card__script">Ewelina &amp; Maciej</p>
       <h1>Niezbędnik biesiady</h1>
       <p class="qr-card__hint">Zeskanuj, aby otworzyć śpiewnik</p>
       <img
-        id="qr-image"
         class="qr-card__img"
         src="assets/qr.png"
         alt="Kod QR do śpiewnika"
         width="280"
         height="280"
       />
-      <p class="qr-card__url" id="qr-url"></p>
-      <a class="btn btn--primary" href="index.html">Wróć do śpiewnika</a>
+      <p class="qr-card__url js-url"></p>
     </main>
+
+    <!-- Arkusz do cięcia: 4 kartki na A4 (widoczny tylko przy druku „4 na A4”) -->
+    <section class="qr-sheet" id="print-sheet" data-print="sheet" hidden aria-hidden="true">
+      <article class="qr-card qr-card--print"></article>
+      <article class="qr-card qr-card--print"></article>
+      <article class="qr-card qr-card--print"></article>
+      <article class="qr-card qr-card--print"></article>
+    </section>
+
+    <p class="qr-card__note no-print">
+      W oknie drukowania wybierz „Zapisz jako PDF”, jeśli chcesz plik zamiast papieru.
+      Kod wskazuje na:
+      <code class="js-url"></code>
+    </p>
+
+    <template id="card-template">
+      <p class="qr-card__script">Ewelina &amp; Maciej</p>
+      <h1>Niezbędnik biesiady</h1>
+      <p class="qr-card__hint">Zeskanuj, aby otworzyć śpiewnik</p>
+      <img class="qr-card__img" src="assets/qr.png" alt="" width="220" height="220" />
+      <p class="qr-card__url js-url"></p>
+    </template>
+
     <script>
-      const url = new URL(".", location.href).href;
-      document.getElementById("qr-url").textContent = url.replace(/\/$/, "") || location.origin;
-      document.getElementById("qr-image").onerror = () => {
-        document.getElementById("qr-image").style.display = "none";
-      };
+      const SITE_URL = "https://kamiltokarz110.github.io/songbook/";
+      const mode = { current: "one" };
+
+      document.querySelectorAll(".js-url").forEach((el) => {
+        el.textContent = SITE_URL.replace(/\/$/, "");
+      });
+
+      const tpl = document.getElementById("card-template");
+      document.querySelectorAll(".qr-card--print").forEach((card) => {
+        card.appendChild(tpl.content.cloneNode(true));
+        card.querySelectorAll(".js-url").forEach((el) => {
+          el.textContent = SITE_URL.replace(/\/$/, "");
+        });
+      });
+
+      function printAs(kind) {
+        mode.current = kind;
+        document.body.dataset.printMode = kind;
+        const sheet = document.getElementById("print-sheet");
+        if (kind === "sheet") {
+          sheet.hidden = false;
+          sheet.removeAttribute("aria-hidden");
+        }
+        window.print();
+      }
+
+      window.addEventListener("afterprint", () => {
+        document.body.dataset.printMode = "one";
+        const sheet = document.getElementById("print-sheet");
+        sheet.hidden = true;
+        sheet.setAttribute("aria-hidden", "true");
+      });
+
+      document.getElementById("btn-print-one").addEventListener("click", () => printAs("one"));
+      document.getElementById("btn-print-sheet").addEventListener("click", () => printAs("sheet"));
     </script>
   </body>
 </html>
